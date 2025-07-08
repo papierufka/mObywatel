@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>mObywatel</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="manifest" href="manifest.json"/>
+</head>
+<body>
+  <div class="status-bar">
+    <span id="time">00:00</span> – <span>LTE</span>
+  </div>
+  <div class="app-bar">
+    ← <span>mObywatel</span>
+  </div>
+  <div class="info-box">
+    <strong>Kiedy nie skorzystasz z mDowodu</strong><br>
+    Gdy załatwiasz sprawę w banku (do 31 sierpnia), wyjeżdżasz za granicę i składasz wniosek o dowód osobisty.
+  </div>
+  <div class="card">
+    <img id="photo" src="" alt="Zdjęcie"/>
+    <div class="details">
+      <div><div class="label">Imię:</div><div class="value" id="name"></div></div>
+      <div><div class="label">Nazwisko:</div><div class="value" id="surname"></div></div>
+      <div><div class="label">Obywatelstwo:</div><div class="value" id="nationality"></div></div>
+      <div><div class="label">Data urodzenia:</div><div class="value" id="birthday"></div></div>
+      <div><div class="label">PESEL:</div><div class="value" id="pesel"></div></div>
+      <div><div class="label">Miejsce urodzenia:</div><div class="value" id="birthPlace"></div></div>
+      <div><div class="label">Adres:</div><div class="value" id="adress1"></div></div>
+    </div>
+  </div>
+  <div class="verified">Dokument ważny</div>
+  <div class="action-box">Potwierdź swoje dane</div>
+  <script>
+    function getParam(name) {
+      return new URLSearchParams(location.search).get(name) || '';
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('photo').src = getParam('image') || 'icon-192.png';
+      ['name','surname','nationality','birthday','pesel','birthPlace','adress1'].forEach(k => {
+        document.getElementById(k).textContent = getParam(k);
+      });
+      navigator.serviceWorker?.register('service-worker.js');
+      const t = new Date();
+      document.getElementById('time').textContent = t.toTimeString().substring(0,5);
+    });
+  </script>
+</body>
+</html>

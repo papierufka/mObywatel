@@ -1,0 +1,12 @@
+body { margin:0; font-family: sans-serif; background:#f2f4f7; color:#000; }
+.status-bar, .app-bar, .info-box, .card, .verified, .action-box {
+  margin:10px; padding:10px; border-radius:10px; background:white;
+}
+.status-bar { font-size:12px; }
+.app-bar { font-size:18px; font-weight:bold; }
+.card img { width:100px; height:120px; object-fit:cover; float:left; margin-right:10px; border-radius:6px; }
+.details { overflow:hidden; }
+.details .label { font-size:12px; color:#666; }
+.details .value { font-size:16px; font-weight:bold; margin-bottom:6px; }
+.verified { background:#d4f8d4; color:green; display:flex; align-items:center; }
+.verified::before { content:"✔"; margin-right:6px; }
